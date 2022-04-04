@@ -16,8 +16,7 @@
 ### Association
 
 - has_many :items
-- has_many :destinations
-- has_many :purchase_history
+- has_many :purchase_histories
 
 ## items テーブル
 
@@ -31,7 +30,7 @@
 | prefecture_id    | integer    | null: false                    |
 | shipping_date_id | integer    | null: false                    |
 | price            | integer    | null: false                    |
-| user             | references | null: false, foreign_key: true |
+| user_id          | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -40,20 +39,21 @@
 
 ## destination テーブル
 
-| Column        | Type       | Options                        |
-| ------------  | ---------- | ------------------------------ |
-| post_code     | string     | null: false                    |
-| prefecture_id | integer    | null: false                    |
-| city          | string     | null: false                    |
-| block         | string     | null: false                    |
-| building      | string     |                                |
-| phone_number  | string     | null: false                    |
+| Column              | Type       | Options                        |
+| ------------------- | ---------- | ------------------------------ |
+| post_code           | string     | null: false                    |
+| prefecture_id       | integer    | null: false                    |
+| city                | string     | null: false                    |
+| block               | string     | null: false                    |
+| building            | string     |                                |
+| phone_number        | string     | null: false                    |
+| purchase_history_id | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_one :purchase_history
+- belongs_to :purchase_history
 
-## purchase_history テーブル
+## purchase_histories テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
@@ -64,4 +64,4 @@
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :destination
+- has_one :destination
