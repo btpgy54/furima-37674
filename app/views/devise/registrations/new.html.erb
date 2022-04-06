@@ -14,7 +14,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :password, "パスワード" %>
+    <%= f.label :password, "パスワード" %><br />
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
@@ -32,7 +32,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :first_name %><br />
+    <%#= f.label :first_name %><br />
     <%= f.text_field :first_name, autofocus: true %>
   </div>
 
@@ -42,8 +42,13 @@
   </div>
 
   <div class="field">
-    <%= f.label :first_name_kana %><br />
+    <%#= f.label :first_name_kana %><br />
     <%= f.text_field :first_name_kana, autofocus: true %>
+  </div>
+
+   <div class="field">
+    <%= f.label :birthday, '生年月日' %><br />
+    <%= f.text_field :birthday, autofocus: true %>
   </div>
 
   <div class="actions">
