@@ -23,6 +23,10 @@ RSpec.describe User, type: :model do
         expect(@user).to be_valid
       end
 
+      it 'passwordが半角英数字であれば登録できる' do
+        expect(@user).to be_valid
+      end
+
       it 'emailが重複していなければ登録できる' do
         expect(@user).to be_valid
       end
@@ -117,10 +121,20 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is too long (maximum is 128 characters)')
       end
-      it 'passwordが半角英数字混合でなければ登録できない' do
+      it 'passwordが半角数字のみの場合は登録できない' do
+        @user.password = '000000'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is invalid')
+      end
+      it 'passwordが半角英字のみの場合は登録できない' do
         @user.password = 'aaaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include('Password is invalid')
+      end
+      it 'passwordが全角の場合は登録できない' do
+        @user.password = 'AAAAAA'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
       it 'last_nameが全角（漢字、ひらがな、カタカナ)でなければ登録できない' do
         @user.last_name = 'yamada'
@@ -177,12 +191,12 @@ RSpec.describe User, type: :model do
         another_user = FactoryBot.build(:user)
         another_user.email = @user.email
         another_user.valid?
-        expect(another_user.errors.full_messages).to include('Email has already been taken')
+        expect(another_user.errors.full_messages).to include("Email has already been taken")
       end
       it 'emailは@を含まないと登録できない' do
         @user.email = 'testmail'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Email is invalid')
+        expect(@user.errors.full_messages).to include("Email is invalid")
       end
       it 'passwordが空では登録できない' do
         @user.password = ''
@@ -201,10 +215,20 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is too long (maximum is 128 characters)')
       end
-      it 'passwordが半角英数字混合でなければ登録できない' do
-        @user.password = 'aaaaaa'
+      it 'passwordが半角数字のみの場合は登録できない' do
+        @user.password = '00000'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include('Password is invalid')
+      end
+      it 'passwordが半角英字のみの場合は登録できない' do
+        @user.password = 'aaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is invalid')
+      end
+      it 'passwordが全角の場合は登録できない' do
+        @user.password = 'AAAAA'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
     end
   end
