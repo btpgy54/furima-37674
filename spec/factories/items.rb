@@ -1,6 +1,14 @@
 FactoryBot.define do
   factory :item do
-    description {Faker::Lorem.sentence}
+    items_name { Faker::Name.name }
+    description { Faker::Lorem.sentence }
+    category_id { 1 }
+    condition_id { 1 }
+    shipping_fee_id { 1 }
+    prefecture_id { 1 }
+    shipping_date_id { 1 }
+    price { Faker::Commerce.price }
+
     association :user
 
     after(:build) do |item|
