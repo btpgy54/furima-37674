@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_08_021220) do
+ActiveRecord::Schema.define(version: 2022_04_08_031143) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -47,6 +47,12 @@ ActiveRecord::Schema.define(version: 2022_04_08_021220) do
     t.integer "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "condition_id"
+    t.integer "shipping_fee_id"
+    t.integer "prefecture_id"
+    t.integer "shipping_date_id"
+    t.text "description"
+    t.string "item_name"
   end
 
   create_table "prefectures", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
