@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
 
   def new
   end
-
+  
   def create
     @item = Item.new(item_params)
     if @item.save
@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:category_id, :condition_id, :shipping_fee_id, :prefecture_id, :shipping_date_id)
+    params.require(:item).permit(:image, :name, :category_id, :condition_id, :shipping_fee_id, :prefecture_id, :shipping_date_id)
   end
 
 end
