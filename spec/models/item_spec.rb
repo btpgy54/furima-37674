@@ -41,27 +41,27 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Description can't be blank")
       end
       it 'category_idが空では登録できない' do
-        @item.category_id = nil
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
       it 'condition_idが空では登録できない' do
-        @item.condition_id = nil
+        @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
       it 'shipping_fee_idが空では登録できない' do
-        @item.shipping_fee_id = nil
+        @item.shipping_fee_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping fee can't be blank")
       end
       it 'prefecture_idが空では登録できない' do
-        @item.prefecture_id = nil
+        @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
       it 'shipping_date_idが空では登録できない' do
-        @item.shipping_date_id = nil
+        @item.shipping_date_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping date can't be blank")
       end
@@ -86,7 +86,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it 'priceが10,000,000以上なら登録できない' do
-        @item.price = Faker::Number.between(from: 9_999_999, to: 10_000_000)
+        @item.price = '10000000'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
@@ -94,6 +94,11 @@ RSpec.describe Item, type: :model do
         @item.price = 'あああ'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not a number')
+      end
+      it 'userが紐ついていなければ保存できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
