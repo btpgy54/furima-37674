@@ -33,7 +33,7 @@ RSpec.describe Item, type: :model do
       it 'images_nameが空では登録できない' do
         @item.items_name = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Images Name can't be blank")
+        expect(@item.errors.full_messages).to include("Items name can't be blank")
       end
       it 'descriptionが空では登録できない' do
         @item.description = ''
@@ -70,30 +70,30 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
-      it 'items_nameが41文字以上なら登録できない' do
-        @item.items_name = Faker::Name.items_name(max_length: 40)
+      it 'items_nameが41文字以上だったら登録できない' do
+        @item.items_name = Faker::Lorem.characters(number: 41)
         @item.valid?
-        expect(@item.errors.full_messages).to include('Item Name is too long (maximum is 40 characters)')
+        expect(@item.errors.full_messages).to include('Items name is too long (maximum is 40 characters)')
       end
-      it 'descriptionが1000文字以上なら登録できない' do
-        @item.description = Faker::Lorem.description(max_length: 1000)
+      it 'descriptionが1001文字だったら登録できない' do
+        @item.description = Faker::Lorem.characters(number: 1001)
         @item.valid?
         expect(@item.errors.full_messages).to include('Description is too long (maximum is 1000 characters)')
       end
-      it 'priceが299円以下なら登録できない' do
-        @item.price = Faker::Commerce.price(min_length: 300)
+      it 'priceが299以下なら登録できない' do
+        @item.price = Faker::Number.between(from: 1, to: 299)
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price is out of setting range')
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
-      it 'priceが9999999円以上なら登録できない' do
-        @item.price = Faker::Commerce.price(max_length: 9_999_999)
+      it 'priceが10,000,000以上なら登録できない' do
+        @item.price = Faker::Number.between(from: 9_999_999, to: 10_000_000)
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price is out of setting range')
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
       it 'priceが全角数値なら登録できない' do
         @item.price = 'あああ'
-        @user.valid?
-        expect(@user.errors.full_messages).to include('Input half-width characters')
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
     end
   end
