@@ -27,6 +27,10 @@
       </span>
     </div>
 
+<<<<<<< Updated upstream
+=======
+    <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
+>>>>>>> Stashed changes
       <% if user_signed_in? && current_user.id == @item.user_id %>
           <%= link_to "商品の編集","#", method: :get, class: "item-red-btn" %>
           <p class="or-text">or</p>
@@ -34,7 +38,11 @@
       <% else %>
           <%= link_to "購入画面に進む", "#", class:"item-red-btn" if user_signed_in? %>
       <% end %>
+<<<<<<< Updated upstream
     
+=======
+    <%# //ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
+>>>>>>> Stashed changes
 
     <div class="item-explain-box">
       <span><%= @item.description %></span>
@@ -63,7 +71,11 @@
         </tr>
         <tr>
           <th class="detail-item">発送日の目安</th>
+<<<<<<< Updated upstream
           <td class="detail-value"><%= @item.shipping_date.name %></td>
+=======
+          <td class="detail-value"><%= @item.shipping_fee.name %></td>
+>>>>>>> Stashed changes
         </tr>
       </tbody>
     </table>
@@ -102,9 +114,15 @@
       後ろの商品 ＞
     </a>
   </div>
+<<<<<<< Updated upstream
 
   <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
 
+=======
+  <%# 詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
+  <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
+  <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
+>>>>>>> Stashed changes
 </div>
 
 <%= render "shared/footer" %>
