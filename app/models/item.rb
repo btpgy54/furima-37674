@@ -8,6 +8,7 @@ class Item < ApplicationRecord
   belongs_to :user
 
   has_one_attached :image
+  has_one :purchase_history
 
   validates :image, presence: true
   validates :items_name, presence: true, length: { maximum: 40 }
