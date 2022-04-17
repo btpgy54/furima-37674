@@ -4,7 +4,7 @@ RSpec.describe OrderDestination, type: :model do
   describe '購入情報の保存' do
     before do
       item = FactoryBot.create(:item)
-      @order_destination = FactoryBot.build(:order_destination, item_id: item.id)
+      @order_destination = FactoryBot.build(:order_destination, item_id: item.id, user_id: user.id)
     end
 
     context '入力に問題がない場合' do
@@ -98,6 +98,12 @@ RSpec.describe OrderDestination, type: :model do
         @order_destination.item_id = nil
         @order_destination.valid?
         expect(@order_destination.errors.full_messages).to include("Item can't be blank")
+      end
+
+      it 'userが紐づいていないと保存できない' do
+        @order_destination.user_id = nil
+        @order_destination.valid?
+        expect(@order_destination.errors.full_messages).to include("User can't be blank")
       end
     end
   end

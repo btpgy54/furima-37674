@@ -8,10 +8,9 @@ class OrderDestination
     validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
     validates :city
     validates :block
-    validates :phone_number, length: { in: 10..11}, format: { with: /\A[0-9]{10,11}\z/, message: 'is invalid.' }
+    validates :phone_number, format: { with: /\A[0-9]{10,11}\z/, message: 'is invalid.' }
     validates :item_id
   end
-  validate :building
 
   def save
     Order.create(item_id: item_id, user_id: user_id)
