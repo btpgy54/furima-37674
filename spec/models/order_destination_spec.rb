@@ -13,6 +13,11 @@ RSpec.describe OrderDestination, type: :model do
         expect(@order_destination).to be_valid
       end
 
+      it 'buildingが空でも保存できる' do
+        @order_destination.building = ''
+        expect(@order_destination).to be_valid
+      end
+
       it 'post_codeが3桁ハイフン4桁であれば保存ができる' do
         expect(@order_destination).to be_valid
       end
@@ -22,11 +27,6 @@ RSpec.describe OrderDestination, type: :model do
       end
       
       it 'phone_numberが10桁以上11桁以内であれば保存できる' do
-        expect(@order_destination).to be_valid
-      end
-
-      it 'buildingは空でも保存できる' do
-        @order_destination.building = ''
         expect(@order_destination).to be_valid
       end
 
